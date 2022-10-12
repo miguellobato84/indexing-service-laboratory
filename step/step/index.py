@@ -21,7 +21,7 @@ def get_object(*, bucket: str, key: str) -> Iterator[Any]:
     return DataFileReader(reader, DatumReader())
 
 
-def ingest_into_es(index: str, iterator):
+def ingest_into_es(index: str, iterator: Iterator[Any]) -> None:
     docs = (
         {
             '_index': index,
