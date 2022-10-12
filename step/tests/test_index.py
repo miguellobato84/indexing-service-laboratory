@@ -27,9 +27,9 @@ def test_get_object_decodes_avro():
 
 def test_ingest_into_es(mocker):
     es_mock = mocker.patch('step.index.es')
+    es_helpers_mock = mocker.patch('step.index.helpers')
     from step.index import ingest_into_es
 
     ingest_into_es('test-index', [{'content': 'test-message'}])
 
-    es_mock.assert_called_with({})
-    pass
+    es_helpers_mock.bulk.assert_called_with(es_mock, {})
